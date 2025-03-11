@@ -348,66 +348,18 @@ function signOut() {
 }
 
 // Handle Add Product Form submission
-document.getElementById('addProductForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  
-  const name = document.getElementById('productName').value.trim();
-  const price = document.getElementById('productPrice').value.trim();
-  const credit = document.getElementById('productCredit').value.trim();
-  const stock = document.getElementById('productStock').value.trim();
-  const imageUrl = document.getElementById('productImageUrl').value.trim();
-  const category = document.getElementById('productCategory').value.trim();
-  
-  let isValid = true;
-  
-  // Clear previous error messages
-  document.getElementById('priceError').innerText = "";
-  document.getElementById('creditError').innerText = "";
-  document.getElementById('stockError').innerText = "";
-  document.getElementById('productMessage').innerText = "";
-
-  // Function to validate positive integer values
-  function validatePositiveNumber(value, errorElement) {
-    if (!/^\d+$/.test(value) || parseInt(value, 10) <= 0) {
-      document.getElementById(errorElement).innerText = "Negative values and zero are not accepted!";
-      return false;
-    }
-    return true;
+document.addEventListener("DOMContentLoaded", function () {
+  const addProductForm = document.getElementById("addProductForm");
+  if (addProductForm) {
+      addProductForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          console.log("Form submitted");
+      });
+  } else {
+      console.error("addProductForm not found");
   }
-
-  // Validate price, credit, and stock fields
-  if (!validatePositiveNumber(price, 'priceError')) isValid = false;
-  if (!validatePositiveNumber(credit, 'creditError')) isValid = false;
-  if (!validatePositiveNumber(stock, 'stockError')) isValid = false;
-
-  // Validate required fields
-  if (!name || !imageUrl || !category) {
-    document.getElementById('productMessage').innerText = "Please provide all product details including category.";
-    return;
-  }
-
-  if (!isValid) return;
-
-  db.collection('products')
-    .add({
-      name: name,
-      price: parseInt(price, 10),
-      credit: parseInt(credit, 10),
-      stock: parseInt(stock, 10),
-      imageUrl: imageUrl,
-      category: category,
-      active: true,
-      createdAt: new Date(),
-    })
-    .then(() => {
-      document.getElementById('productMessage').innerText = "Product added successfully!";
-      document.getElementById('addProductForm').reset();
-      loadProducts();
-    })
-    .catch((err) => {
-      document.getElementById('productMessage').innerText = err.message;
-    });
 });
+
 
 
 // Handle Update Product Form submission

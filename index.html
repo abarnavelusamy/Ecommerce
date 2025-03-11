@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K_MART</title>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('register')">Register</a>
+    <a onclick="showSection('login')">Login</a>
+    <a onclick="showSection('products')">Products</a>
+    <a onclick="showSection('cart')">Cart</a>
+    <a onclick="showSection('history')">History</a>
+    <a onclick="showSection('bills')">Bills</a>
+    <a onclick="logout()">Logout</a>
+  </nav>
+
+  <div class="container">
+    <h1>K_MART</h1>
+
+    <!-- Home Section -->
+    <div id="home" class="section active">
+      <h2>Welcome!</h2>
+      <p>Browse our products, register, login, or continue as a guest to start shopping.</p>
+    </div>
+
+    <!-- Register Section -->
+    <div id="register" class="section">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <input type="email" id="regEmail" placeholder="Email" required>
+        <input type="password" id="regPassword" placeholder="Password" required>
+        <button type="submit">Register</button>
+      </form>
+      <div id="regMessage"></div>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login" class="section">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <div id="loginMessage"></div>
+    </div>
+
+    <!-- Products Section -->
+    <div id="products" class="section">
+      <h2>Products</h2>
+      <div class="category-filter">
+        <label for="categorySelect">Filter by Category:</label>
+        <select id="categorySelect">
+          <!-- Options will be populated dynamically by JS -->
+        </select>
+      </div>
+      <div id="productsList" class="product-grid"></div>
+    </div>
+
+    <!-- Cart Section -->
+<div id="cart" class="section">
+  <h2>Your Cart</h2>
+  <div id="cartList"></div>
+  <!-- New element for displaying the total amount -->
+  <div id="totalAmount" style="font-weight: bold; font-size: 16px; margin: 10px 0;"></div>
+  <button onclick="placeOrder()" class="place-order-btn">Place Order</button>
+  <p id="productMessage"></p>
+</div>
+
+
+    <!-- History Section -->
+    <div id="history" class="section">
+      <h2>Order History</h2>
+      <div id="historyList"></div>
+    </div>
+
+    <!-- Bills Section -->
+    <div id="bills" class="section">
+      <h2>Your Bills</h2>
+      <div id="billsList"></div>
+    </div>
+  </div>
+
+  <!-- Load JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
